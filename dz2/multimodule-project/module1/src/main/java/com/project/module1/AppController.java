@@ -15,14 +15,8 @@ public class AppController {
     }
 
     @GetMapping("/hello{name}")
-    public String printGreeting(@RequestParam("name") String name){
-        String greeting;
-        if ("".equals(name)){
-            greeting = "Hello, anonymous!";
-        }else {
-            greeting = "Hello, "+ name+ "!";
-        }
-
+    public String printGreeting(@RequestParam(name = "name", defaultValue = "anonymous") String name){
+        String greeting = "Hello, "+ name+ "!";
         String uniqueChars = Controller.getUniqueChars(List.of(greeting)).toString();
 
         return greeting + "<br/> Unique characters: " + uniqueChars;
